@@ -10,18 +10,12 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-
-
-
 final class CityViewViewModel: ObservableObject {
     
     @Published  var weather = WeatherResponse.empty()
-    
     @Published var city: String = "Mutare" {
         didSet {
-            // TODO: - Call to get location
-            //TODO: - Thus getLocation
-            getLocation()
+            getLocation() // TODO: - Call to get location - Thus getLocation
         }
     }
     
@@ -44,12 +38,10 @@ final class CityViewViewModel: ObservableObject {
     }()
     
     init() {
-        //TODO: - getLocation
-        getLocation()
+        getLocation()     //TODO: - getLocation
     }
     
-    //TODO: Computed Properties
-    //TODO: - Return a formatted response
+    //TODO: Computed Properties - //TODO: - Return a formatted response
     var date: String {
         return dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(weather.current.dt)))
     }
@@ -97,7 +89,7 @@ final class CityViewViewModel: ObservableObject {
     }
     
     //TODO: - with guard statement
-    private func getLocation() {
+    private func getLocationTwo() {
         CLGeocoder().geocodeAddressString(city) { [weak self] (placemarks, error) in
             guard let self = self else { return }
             
@@ -116,7 +108,7 @@ final class CityViewViewModel: ObservableObject {
     }
     
     //TODO: - with if let statement
-    private func getLocationTwo() {
+    private func getLocation() {
         CLGeocoder().geocodeAddressString(city) { (placemarks, error) in
             if let error = error {
                 print("Geocoding failed: \(error.localizedDescription)")
@@ -136,7 +128,7 @@ final class CityViewViewModel: ObservableObject {
             let urlString = API.getURLFor(lat: coord.latitude, lon: coord.longitude)
             getWeatherInternal(city: city, for: urlString)
         } else {
-            let urlString = API.getURLFor(lat: 32.6514, lon: -161.4333)
+            let urlString = API.getURLFor(lat: 18.9758, lon: 32.6691)
             getWeatherInternal(city: city, for: urlString)
         }
     }
