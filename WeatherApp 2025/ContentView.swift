@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var cityViewModel = CityViewViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStackLayout(alignment: .bottom) {
+            
+            VStack(spacing: 0) {
+                MenuHeaderView(cityViewModel: cityViewModel)
+                ScrollView {
+                    CityView(cityViewModel: cityViewModel)
+                }
+            }
+            .padding(.top, 30)
+            
         }
-        .padding()
+        .padding(.bottom)
+        .padding(.horizontal)
     }
 }
 
